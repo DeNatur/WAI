@@ -4,8 +4,10 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/rounded_rect_16"
-    android:layout_height="wrap_content">
-    wrap_content
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView"
@@ -24,15 +26,34 @@
         app:layout_constraintTop_toTopOf="parent"></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Michał Posłuszny"
         android:textColor="#000000"
+        android:textSize="24sp"
+        android:fontFamily="@font/roboto_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toEndOf="@+id/circleImageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.197" />
+
+    <TextView
+        android:id="@+id/mbti_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="ENTJ"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/name"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
