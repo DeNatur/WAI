@@ -2,12 +2,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="PROFIL"
-        android:gravity="center"
-        android:textSize="16dp"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
