@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "895678022780",
+    "firebase_url": "https://who-am-i-2410.firebaseio.com",
+    "project_id": "who-am-i-2410",
+    "storage_bucket": "who-am-i-2410.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895678022780:android:85cb80fb4c9bed4d06b5f9",
+        "android_client_info": {
+          "package_name": "com.eruntimeterror.wai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895678022780-75ocm5gcmatlvgfef0qrtah4bomb1clh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-CIQl_R_t_GrdaxtDna9ofTjDaSjNefw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895678022780-75ocm5gcmatlvgfef0qrtah4bomb1clh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
