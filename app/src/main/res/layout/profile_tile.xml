@@ -10,38 +10,38 @@
     android:layout_marginBottom="20dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circleImageView"
+        android:id="@+id/profilepic"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_margin="10dp"
         android:src="@drawable/prof_def"
         app:civ_border_color="#000"
         app:civ_border_overlay="true"
-        app:civ_border_width="2dp"
+        app:civ_border_width="0dp"
         app:civ_circle_background_color="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/ttitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_light"
         android:text="Michał Posłuszny"
         android:textColor="#000000"
         android:textSize="24sp"
-        android:fontFamily="@font/roboto_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
-        app:layout_constraintStart_toEndOf="@+id/circleImageView"
+        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.197" />
 
     <TextView
-        android:id="@+id/mbti_type"
+        android:id="@+id/tarticle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -50,9 +50,9 @@
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/name"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="@+id/ttitle"
+        app:layout_constraintStart_toStartOf="@+id/ttitle"
+        app:layout_constraintTop_toBottomOf="@+id/ttitle"
         app:layout_constraintVertical_bias="0.0" />
 
 
