@@ -36,10 +36,10 @@ public class Profile_Fragment extends Fragment {
         TileContent dailytip= new TileContent("Daily Tip","Here is daily tip for ur fellows entjs","");
         TileContent graph= new TileContent("Your deailed MBTI results","data","");
         TileContent[] tiles = {profile,dailytip,graph};
-        TileAdapter adapter = new TileAdapter(getActivity(),new ArrayList<TileContent>(Arrays.asList(tiles)));
+        //TileAdapter adapter = new TileAdapter(getContext(),new ArrayList<TileContent>(Arrays.asList(tiles)));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
         rv.setLayoutManager(layoutManager);
-        rv.setAdapter(adapter);
+        //rv.setAdapter(adapter);
     }
 }
 
