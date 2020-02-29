@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 viewPager.setCurrentItem(0);
+
             }
         });
         wiki.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +62,51 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 viewPager.setCurrentItem(3);
+            }
+        });
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                profile.setScaleX(0.8f);
+                profile.setScaleY(0.8f);
+                wiki.setScaleX(0.8f);
+                wiki.setScaleY(0.8f);
+                map.setScaleX(0.8f);
+                map.setScaleY(0.8f);
+                chat.setScaleX(0.8f);
+                chat.setScaleY(0.8f);
+                switch (position){
+                    case 0:
+                        profile.setScaleX(1f);
+                        profile.setScaleY(1f);
+                        profile.setColorFilter(getResources().getColor(R.color.icon_tint));
+                        break;
+                    case 1:
+                        wiki.setScaleX(1f);
+                        wiki.setScaleY(1f);
+                        wiki.setColorFilter(getResources().getColor(R.color.icon_tint));
+                        break;
+                    case 2:
+                        map.setScaleX(1f);
+                        map.setScaleY(1f);
+                        map.setColorFilter(getResources().getColor(R.color.icon_tint));
+                        break;
+                    case 3:
+                        chat.setScaleX(1f);
+                        chat.setScaleY(1f);
+                        chat.setColorFilter(getResources().getColor(R.color.icon_tint));
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
 
