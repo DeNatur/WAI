@@ -4,13 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/theme"
     tools:context=".activities.MainActivity">
-
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="0dp"
+        android:layout_marginTop="45dp"
+        app:cardCornerRadius="24dp">
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:paddingTop="4dp"
+            android:layout_gravity="center"
+            android:background="@drawable/top">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_height="wrap_content"
+                android:text="Who Am I"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:layout_marginLeft="50dp"
+                android:fontFamily="@font/blackcherry"
+                android:textSize="30dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/log_out"
+                android:src="@drawable/log_out"
+                android:tint="#fff"
+                android:layout_weight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_gravity="center">
+
+            </ImageView>
+        </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_gravity="bottom"
@@ -51,7 +94,6 @@
                 android:scaleType="fitCenter"
                 android:scaleX="0.8"
                 android:scaleY="0.8"
-                android:tint="@color/icon_tint"
                 app:srcCompat="@drawable/expert" />
 
             <LinearLayout
@@ -68,7 +110,6 @@
                 android:scaleType="fitCenter"
                 android:scaleX="0.8"
                 android:scaleY="0.8"
-                android:tint="@color/icon_tint"
                 app:srcCompat="@drawable/pin" />
 
             <ImageView
@@ -83,7 +124,6 @@
                 android:scaleType="fitCenter"
                 android:scaleX="0.8"
                 android:scaleY="0.8"
-                android:tint="@color/icon_tint"
                 app:srcCompat="@drawable/comment" />
         </LinearLayout>
     </LinearLayout>
