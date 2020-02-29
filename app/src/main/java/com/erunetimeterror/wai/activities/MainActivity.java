@@ -1,17 +1,23 @@
 package com.erunetimeterror.wai.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.erunetimeterror.wai.MainApplication;
 import com.erunetimeterror.wai.R;
 import com.erunetimeterror.wai.fragments.ChatFragment;
 import com.erunetimeterror.wai.fragments.MapsFragments;
@@ -21,6 +27,7 @@ import com.erunetimeterror.wai.fragments.WikiFragment;
 public class MainActivity extends AppCompatActivity {
     FragmentsPagerAdapter fragmentsPagerAdapter;
     ViewPager viewPager;
+    private int locationRequestCode = 1000;
     ImageView profile, wiki, map, chat;
 
     @Override
@@ -30,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        MainApplication app = (MainApplication) getApplicationContext();
 
         fragmentsPagerAdapter = new FragmentsPagerAdapter(getSupportFragmentManager());
         viewPager = findViewById(R.id.pager);
@@ -38,7 +46,38 @@ public class MainActivity extends AppCompatActivity {
         map = findViewById(R.id.map);
         chat = findViewById(R.id.chat);
         viewPager.setAdapter(fragmentsPagerAdapter);
+        initilizeViews();
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    locationRequestCode);
+        }else {
+            app.setLastLocation(MainActivity.this);
+        }
+        app.initializeLocation();
 
+    }
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1000: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                    }
+
+                } else {
+                    Toast.makeText(MainActivity.this, "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+        }
+    }
+    private void initilizeViews(){
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,13 +142,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
 
             }
         });
-
     }
     class FragmentsPagerAdapter extends FragmentStatePagerAdapter {
         Fragment[] fragments = new Fragment[4];
@@ -134,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ChatFragment();
                     break;
                 default:
-                    fragment = new MapsFragments();
+                    fragment = new Profile_Fragment();
             }
             return fragment;
         }

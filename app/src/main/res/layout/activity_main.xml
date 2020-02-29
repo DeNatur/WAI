@@ -28,7 +28,14 @@
             android:paddingTop="4dp"
             android:layout_gravity="center"
             android:background="@drawable/top">
-
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/settings"
+                android:src="@drawable/settings"
+                android:tint="#fff"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="8"
@@ -38,8 +45,7 @@
                 android:layout_gravity="center"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:layout_marginLeft="50dp"
-                android:fontFamily="@font/blackcherry"
+                android:fontFamily="@font/roboto_regular"
                 android:textSize="30dp"/>
             <ImageView
                 android:layout_width="20dp"
@@ -48,10 +54,8 @@
                 android:src="@drawable/log_out"
                 android:tint="#fff"
                 android:layout_weight="1"
-                android:layout_marginLeft="16dp"
-                android:layout_gravity="center">
+                android:layout_gravity="center"/>
 
-            </ImageView>
         </LinearLayout>
     </RelativeLayout>
     <LinearLayout
