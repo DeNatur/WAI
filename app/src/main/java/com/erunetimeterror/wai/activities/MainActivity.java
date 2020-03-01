@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.erunetimeterror.wai.MainApplication;
 import com.erunetimeterror.wai.R;
 import com.erunetimeterror.wai.fragments.ChatFragment;
+import com.erunetimeterror.wai.fragments.FriendsFragment;
 import com.erunetimeterror.wai.fragments.MapsFragments;
 import com.erunetimeterror.wai.fragments.Profile_Fragment;
 import com.erunetimeterror.wai.fragments.WikiFragment;
@@ -168,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new MapsFragments();
                     break;
                 case 3:
-                    fragment = new ChatFragment();
+                    fragment = new FriendsFragment();
                     break;
                 default:
                     fragment = new Profile_Fragment();
