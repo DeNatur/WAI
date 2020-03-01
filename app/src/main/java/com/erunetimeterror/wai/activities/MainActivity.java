@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         if (!prefs.contains(Statics.HOBBIES)){
             prefs.edit().putString(Statics.HOBBIES, "boardgames;electronics").commit();
         }
+
+        Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+        this.startActivity(intent);
 
         fragmentsPagerAdapter = new FragmentsPagerAdapter(getSupportFragmentManager());
         viewPager = findViewById(R.id.pager);

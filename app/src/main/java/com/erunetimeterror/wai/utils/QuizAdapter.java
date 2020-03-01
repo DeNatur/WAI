@@ -86,6 +86,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.ViewHolder> im
 
         // TUTAJ USTAWIĆ PRZYPISYWANIE PUNKTÓW NA POSDTAWIE POSITION I TEGO JAKIE JEST PYTANIE
 
+        /*
         holder.radioGroupAnswer.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
@@ -115,6 +116,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.ViewHolder> im
                 quizActivity.getAnswers().setAnswer(key_short, point, selection);
             }
         });
+         */
     }
 
     // total number of rows

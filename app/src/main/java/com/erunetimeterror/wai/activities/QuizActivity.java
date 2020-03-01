@@ -72,6 +72,7 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.ItemC
                 quizAdapter.removeAll();
                 if (loadNodesIntoView()) {
                     Log.i("SPEC", "Finished");
+                    onBackPressed();
                 }
                 for (Map.Entry<String, Object> entry : questionsDB.entrySet()) {
                     Log.i("Lista", entry.getValue().toString());
@@ -103,7 +104,7 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.ItemC
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + quizAdapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "You clicked " + quizAdapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     }
 
     public void loadNodesFromFirebase() {
