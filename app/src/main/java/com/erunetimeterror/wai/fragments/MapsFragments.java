@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
@@ -44,6 +45,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -91,6 +93,7 @@ public class MapsFragments extends Fragment implements OnMapReadyCallback {
     PlacesAdapter adapter;
     LinearLayout fog;
     SpinKitView spin;
+    String[] hobbiesArray;
     // Create the gradient.
     int[] colors = {
             Color.rgb(50, 168, 119), // green
@@ -137,6 +140,9 @@ public class MapsFragments extends Fragment implements OnMapReadyCallback {
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(wayLatitude, wayLongitude), 15.0f));
             }
         });
+        SharedPreferences prefs = getContext().getSharedPreferences(Statics.WAI_Prefs, 0);
+        String tmpHobbies = prefs.getString(Statics.HOBBIES,"");
+        hobbiesArray = tmpHobbies.split(";");
     }
     BroadcastReceiver locationReceiver = new BroadcastReceiver() {
         @Override
@@ -216,7 +222,7 @@ public class MapsFragments extends Fragment implements OnMapReadyCallback {
 
                     Location.distanceBetween(loc.latitude,loc.longitude,latLng.latitude,latLng.longitude,dist);
 
-                    if(dist[0]/1000 < 0.1){
+                    if(dist[0]/1000 < 0.03){
                         fog.setVisibility(View.VISIBLE);
                         spin.setVisibility(View.VISIBLE);
                         Log.d("Location",loc.toString());
@@ -226,7 +232,8 @@ public class MapsFragments extends Fragment implements OnMapReadyCallback {
                         final boolean[] first = {true};
                         Places.initialize(getContext().getApplicationContext(), getContext().getResources().getString(R.string.places_key));
                         PlacesClient placesClient = Places.createClient(getContext());
-                        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(loc.latitude, latLng.longitude), 3);
+                        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(loc.latitude, latLng.longitude), 0.3);
+
                         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
                             @Override
                             public void onKeyEntered(final String key, GeoLocation location) {
@@ -250,7 +257,8 @@ public class MapsFragments extends Fragment implements OnMapReadyCallback {
 
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                        fog.setVisibility(View.GONE);
+                                        spin.setVisibility(View.GONE);
                                     }
                                 });
 
@@ -301,7 +309,19 @@ public class MapsFragments extends Fragment implements OnMapReadyCallback {
                             }
                         }
                     }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        fog.setVisibility(View.GONE);
+                        spin.setVisibility(View.GONE);
+                    }
                 });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                fog.setVisibility(View.GONE);
+                spin.setVisibility(View.GONE);
             }
         });
     }
@@ -341,7 +361,19 @@ public class MapsFragments extends Fragment implements OnMapReadyCallback {
                             spin.setVisibility(View.GONE);
                             end = true;
                         }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            fog.setVisibility(View.GONE);
+                            spin.setVisibility(View.GONE);
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    fog.setVisibility(View.GONE);
+                    spin.setVisibility(View.GONE);
                 }
             });
 
