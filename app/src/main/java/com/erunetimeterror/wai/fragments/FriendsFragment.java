@@ -21,7 +21,7 @@ public class FriendsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.friends_fragment, container, false);
         RecyclerView rv =  v.findViewById(R.id.friends_recycle);
-        String[] names = {"Szymon","Natalia","Konrad","Kuba","Patrycja","Asia"};
+        String[] names = {"Szymon INFP","Natalia INFP","Konrad ISTJ","Kuba ESFJ","Patrycja ENFP","Asia ENTJ"};
         String[] msg = {"Hej, widziałeś już ten nowy film o...","Idziemy na planszówki jutro? :D","Ta książka którą przeczytałem jest genialna, musisz...","","",""};
         ArrayList<String> anames = new ArrayList<String>(Arrays.asList(names));
         ArrayList<String> amsg = new ArrayList<String>(Arrays.asList(msg));
