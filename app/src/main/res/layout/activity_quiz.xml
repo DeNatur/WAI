@@ -18,7 +18,10 @@
         android:id="@+id/btnNextPage"
         android:layout_width="match_parent"
         android:layout_height="64dp"
+        android:layout_marginHorizontal="64dp"
+        android:layout_marginBottom="16dp"
         android:layout_alignBottom="@+id/rvQuestions"
-        android:text="Dalej"/>
+        android:text="@string/next"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 
 </RelativeLayout>

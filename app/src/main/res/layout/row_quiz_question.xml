@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
+    android:layout_marginTop="16dp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvSingleQuestion"
+        android:layout_marginHorizontal="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -16,36 +18,59 @@
         />
 
     <LinearLayout
+        android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp">
 
-        <Button
-            android:id="@+id/button_vn"
-            android:layout_width="0dp"
+        <RadioGroup
+            android:id="@+id/rgAns"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Very No" />
-
-        <Button
-            android:id="@+id/button_n"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="No" />
-
-        <Button
-            android:id="@+id/button_t"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Yes" />
-
-        <Button
-            android:id="@+id/button_vt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Very Yes" />
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/roboto_medium">
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/rbVN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Not really"
+                android:textColor="@android:color/secondary_text_light"/>
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/rbN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:textColor="@android:color/secondary_text_light"
+                />
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/rbY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:textColor="@android:color/secondary_text_light"
+                />
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/rbVY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Very much"
+                android:textColor="@android:color/secondary_text_light"
+                />
+        </RadioGroup>
     </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_height="1dp"
+        android:gravity="center_horizontal"
+        android:background="@android:color/darker_gray"/>
 
 </LinearLayout>

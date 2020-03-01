@@ -10,10 +10,12 @@ import android.text.BoringLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.erunetimeterror.wai.R;
+import com.erunetimeterror.wai.utils.Answers;
 import com.erunetimeterror.wai.utils.QuizAdapter;
 
 import java.io.FileInputStream;
@@ -28,19 +30,29 @@ import java.util.Objects;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.api.Distribution;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class QuizActivity extends AppCompatActivity implements QuizAdapter.ItemClickListener {
 
-    Integer NO_VIEWABLE_ELEMENTS = 6;
+public class QuizActivity extends AppCompatActivity implements QuizAdapter.ItemClickListener {
+    public Answers getAnswers() {
+        return answers;
+    }
+
+    Answers answers = new Answers();
+
+    Integer NO_VIEWABLE_ELEMENTS = 4;
 
     QuizAdapter quizAdapter;
     ArrayList<String> questionText = new ArrayList<>();
+    ArrayList<String> questionKey = new ArrayList<>();
     Map<String, Object> questionsDB;
-    Button btnNextPage;
+
+    Button btnNextPage, btnVN, btnN, btnY, btnVY;
+    LinearLayout linearLayout;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference docRef = db.collection("questions").document("mbti");
@@ -58,7 +70,7 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.ItemC
             @Override
             public void onClick(View view) {
                 quizAdapter.removeAll();
-                if (loadNodesIntoView() == true) {
+                if (loadNodesIntoView()) {
                     Log.i("SPEC", "Finished");
                 }
                 for (Map.Entry<String, Object> entry : questionsDB.entrySet()) {
@@ -66,6 +78,13 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.ItemC
                 }
             }
         });
+
+        /*
+        btnVN = findViewById(R.id.btnVN);
+        btnN = findViewById(R.id.btnN);
+        btnY = findViewById(R.id.btnY);
+        btnVY = findViewById(R.id.btnVY);
+        */
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvQuestions);
@@ -75,7 +94,7 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.ItemC
                 return false;
             }
         });
-        quizAdapter = new QuizAdapter(this, questionText);
+        quizAdapter = new QuizAdapter(this, questionKey, questionText, this);
         quizAdapter.setClickListener(this);
         recyclerView.setAdapter(quizAdapter);
 
@@ -119,7 +138,7 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.ItemC
             {
                 allNodesAreNull = false;
                 if (NO_VIEWABLE_ELEMENTS != counter) {
-                    quizAdapter.addItem(entry.getValue().toString(), quizAdapter.getItemCount());
+                    quizAdapter.addItem(entry.getKey(), entry.getValue().toString(), quizAdapter.getItemCount());
                     entry.setValue("NULL");
                 } else
                     break;
@@ -127,5 +146,10 @@ public class QuizActivity extends AppCompatActivity implements QuizAdapter.ItemC
             }
         }
         return allNodesAreNull;
+    }
+
+    public void saveAnswersToFirebase()
+    {
+
     }
 }
