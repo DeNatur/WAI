@@ -3,8 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="theme">#83c181</color>
-    <color name="themeAccent">#62C65F</color>
+    <color name="theme">#4BCD76</color>
+    <color name="themeAccent">#29BF53</color>
     <color name="icon_tint">#45498D</color>
     <color name="black_transparentA4">#A4000000</color>
 </resources>
