@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/theme"
     tools:context=".activities.MainActivity">
+
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     </androidx.cardview.widget.CardView>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -58,6 +61,40 @@
 
         </LinearLayout>
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/fog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/black_transparentA4"
+        android:clickable="true"/>
+    <LinearLayout
+        android:id="@+id/matchesLayout"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_height="420dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YOUR MATCHES"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/rounded_rect_16"
+            android:textColor="@color/theme"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="16dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerMatches"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"/>
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_gravity="bottom"
@@ -144,6 +181,14 @@
         app:fab_expandDirection="up"
         app:fab_size="normal"/>
 
-
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        android:visibility="gone"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/quantum_grey" />
 
 </FrameLayout>

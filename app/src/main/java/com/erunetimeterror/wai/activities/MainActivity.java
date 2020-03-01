@@ -5,6 +5,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.erunetimeterror.wai.MainApplication;
@@ -24,12 +27,20 @@ import com.erunetimeterror.wai.fragments.FriendsFragment;
 import com.erunetimeterror.wai.fragments.MapsFragments;
 import com.erunetimeterror.wai.fragments.Profile_Fragment;
 import com.erunetimeterror.wai.fragments.WikiFragment;
+import com.erunetimeterror.wai.utils.MatchesAdapter;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     FragmentsPagerAdapter fragmentsPagerAdapter;
     ViewPager viewPager;
     private int locationRequestCode = 1000;
     ImageView profile, wiki, map, chat;
+    LinearLayout fog;
+    RecyclerView recyclerMatches;
+    LinearLayout matchesLayout;
+    FloatingActionsMenu fMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         wiki = findViewById(R.id.wiki);
         map = findViewById(R.id.map);
         chat = findViewById(R.id.chat);
+        fMenu = findViewById(R.id.fab);
+        fog = findViewById(R.id.fog);
+        recyclerMatches = findViewById(R.id.recyclerMatches);
+        matchesLayout = findViewById(R.id.matchesLayout);
         viewPager.setAdapter(fragmentsPagerAdapter);
         initilizeViews();
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -56,6 +71,44 @@ public class MainActivity extends AppCompatActivity {
             app.setLastLocation(MainActivity.this);
         }
         app.initializeLocation();
+        fMenu.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
+            @Override
+            public void onMenuExpanded() {
+                fog.setVisibility(View.VISIBLE);
+                fog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        fMenu.collapse();
+                    }
+                });
+                ArrayList<String> names = new ArrayList<>();
+                ArrayList<String> types = new ArrayList<>();
+                names.add("Szymon");
+                names.add("Michal");
+                names.add("Piotr");
+                names.add("Aleksandra");
+                names.add("Wiola");
+
+                types.add("INTP");
+                types.add("INTP");
+                types.add("INFP");
+                types.add("INFP");
+                types.add("ENTP");
+                MatchesAdapter matchesAdapter = new MatchesAdapter(names, types);
+                recyclerMatches.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                recyclerMatches.setAdapter(matchesAdapter);
+                matchesLayout.setVisibility(View.VISIBLE);
+                matchesLayout.setTranslationY(500);
+                matchesLayout.setAlpha(0.2f);
+                matchesLayout.animate().alpha(1.0f).translationYBy(-500).setDuration(500).start();
+            }
+
+            @Override
+            public void onMenuCollapsed() {
+                fog.setVisibility(View.GONE);
+                matchesLayout.setVisibility(View.GONE);
+            }
+        });
 
     }
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

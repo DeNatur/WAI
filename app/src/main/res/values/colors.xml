@@ -6,4 +6,5 @@
     <color name="theme">#83c181</color>
     <color name="themeAccent">#62C65F</color>
     <color name="icon_tint">#45498D</color>
+    <color name="black_transparentA4">#A4000000</color>
 </resources>

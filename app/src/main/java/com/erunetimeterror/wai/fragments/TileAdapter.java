@@ -29,9 +29,9 @@ public class TileAdapter extends RecyclerView.Adapter<TileAdapter.ViewHolder> {
     private int len;
 
 
-    public TileAdapter(Context context,ArrayList<TileContent> atilecontent,int alen){
+    public TileAdapter(Context context, ArrayList<TileContent> atilecontent, int len){
         tilecontent=atilecontent;
-        len = alen;
+        this.len = len;
 
     }
 
