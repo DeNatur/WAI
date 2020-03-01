@@ -12,7 +12,7 @@
         android:textStyle="bold"
         android:textColor="@color/theme"
         android:layout_margin="16dp"
-        android:text="People with simillar hobbys visited those places"/>
+        android:text="People with simillar hobbies visited those places"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_margin="16dp"
         android:id="@+id/recyclerPlaces"

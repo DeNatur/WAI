@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.erunetimeterror.wai.R;
+import com.erunetimeterror.wai.activities.GameActivity;
 import com.google.android.libraries.places.api.model.Place;
 
 import java.util.ArrayList;
@@ -40,6 +41,13 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.ViewHold
         String type = types.get(holder.getAdapterPosition());
         holder.type.setText(type);
         holder.name.setText(name);
+        holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), GameActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

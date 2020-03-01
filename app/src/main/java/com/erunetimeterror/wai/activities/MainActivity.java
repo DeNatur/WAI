@@ -6,16 +6,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -28,6 +34,7 @@ import com.erunetimeterror.wai.fragments.MapsFragments;
 import com.erunetimeterror.wai.fragments.Profile_Fragment;
 import com.erunetimeterror.wai.fragments.WikiFragment;
 import com.erunetimeterror.wai.utils.MatchesAdapter;
+import com.erunetimeterror.wai.utils.Statics;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
@@ -50,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         MainApplication app = (MainApplication) getApplicationContext();
+        SharedPreferences prefs = getSharedPreferences(Statics.WAI_Prefs, 0);
+        if (!prefs.contains(Statics.HOBBIES)){
+            prefs.edit().putString(Statics.HOBBIES, "boardgames;electronics").commit();
+        }
 
         fragmentsPagerAdapter = new FragmentsPagerAdapter(getSupportFragmentManager());
         viewPager = findViewById(R.id.pager);
@@ -81,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                         fMenu.collapse();
                     }
                 });
-                ArrayList<String> names = new ArrayList<>();
+                final ArrayList<String> names = new ArrayList<>();
                 ArrayList<String> types = new ArrayList<>();
                 names.add("Szymon");
                 names.add("Michal");
@@ -95,8 +106,36 @@ public class MainActivity extends AppCompatActivity {
                 types.add("INFP");
                 types.add("ENTP");
                 MatchesAdapter matchesAdapter = new MatchesAdapter(names, types);
-                recyclerMatches.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false) {
+                    @Override
+                    public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
+                        LinearSmoothScroller smoothScroller = new LinearSmoothScroller(getApplicationContext()) {
+                            private static final float SPEED = 500f;// Change this value (default=25f)
+                            @Override
+                            protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
+                                return SPEED / displayMetrics.densityDpi;
+                            }
+                        };
+                        smoothScroller.setTargetPosition(position);
+                        startSmoothScroll(smoothScroller);
+                    }
+                };
+                recyclerMatches.setLayoutManager(linearLayoutManager);
+                recyclerMatches.setHasFixedSize(true);
+
+                LayoutAnimationController controller = null;
+                //controller = AnimationUtils.loadLayoutAnimation(recyclerMatches.getContext(), R.anim.layout_animation_slide_from_bottom);
+                recyclerMatches.setLayoutAnimation(controller);
                 recyclerMatches.setAdapter(matchesAdapter);
+                //recyclerUsages.getAdapter().notifyDataSetChanged();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerMatches.scheduleLayoutAnimation();
+                        recyclerMatches.smoothScrollToPosition(names.size());
+                    }
+                }, 0);
                 matchesLayout.setVisibility(View.VISIBLE);
                 matchesLayout.setTranslationY(500);
                 matchesLayout.setAlpha(0.2f);
